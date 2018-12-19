@@ -1,5 +1,8 @@
 # PnP-Depth
-Implementation for "Plug-and-Play: Improve Depth Prediction via Sparse Data Propagation"
+Implementation for "Plug-and-Play: Improve Depth Prediction via Sparse Data Propagation".
+
+<img src="index/teaser.gif" alt="photo not available" height="400">
+
 
 # Adding PnP module to your model
 - Pytorch
