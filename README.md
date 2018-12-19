@@ -57,6 +57,6 @@ def _body(z_loop, i_loop):
     
 z = model_front(inputs)
 z, _ = tf.while_loop(_cond, _body, (z, 0), back_prop=False, name='pnp')
-pred = model_rear(z)
+pred = model_rear(z, True)
 # "pred" is the prediction after PnP module
 ```
