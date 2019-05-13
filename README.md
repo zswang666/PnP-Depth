@@ -1,7 +1,7 @@
 # PnP-Depth
 [project page](https://zswang666.github.io/PnP-Depth-Project-Page/) | [paper](https://arxiv.org/abs/1812.08350) | [video](https://drive.google.com/file/d/1XepIu6uSPVI5XidQnabN1_ZLKIfXaQaP/view)
 
-Implementation for "Plug-and-Play: Improve Depth Prediction via Sparse Data Propagation", [ICRA 2019](https://www.icra2019.org/). **PnP-Depth** is used as an add-on module to existing depth completion models. Only with *a few line of modification on the original code*, we can apply **PnP-Depth** to the model and *obatin performance gain*.
+Implementation for "*Plug-and-Play: Improve Depth Prediction via Sparse Data Propagation*", [ICRA 2019](https://www.icra2019.org/). **PnP-Depth** is used as an add-on module to existing depth completion models. Only with *a few line of modification on the original code*, we can apply **PnP-Depth** to the model and *obatin performance gain*.
 
 <img src="index/teaser.gif" alt="photo not available" height="400">
 
@@ -28,7 +28,7 @@ Here we show the pseudocode of **PnP-Depth**.
 
 ## Adding PnP module to your model
 Here we show some examples of applying **PnP-Depth** to existing models.
-- **PnP-Depth in Pytorch**. There is an example of applying PnP-Depth to a depth completion model originated from [here](https://github.com/fangchangma/sparse-to-dense.pytorch). The modified code is shown in [sparse-to-dense.pytorch](sparse-to-dense.pytorch). We only add a few lines to [model.py](sparse-to-dense.pytorch/model.py) and replace [main.py](sparse-to-dense.pytorch/main.py) with [main_pnp.py](sparse-to-dense.pytorch/main_pnp.py) (new main file is created solely for clarity). *Search for ```PnP-Depth``` in the files to find all modification*. A quick glance at PnP-Depth in Pytorch:
+- **PnP-Depth in Pytorch**. There is an example of applying PnP-Depth to a depth completion model originated from [here](https://github.com/fangchangma/sparse-to-dense.pytorch). The modified code is shown in [sparse-to-dense.pytorch](sparse-to-dense.pytorch). We only add a few lines to [model.py](sparse-to-dense.pytorch/models.py) and replace [main.py](sparse-to-dense.pytorch/main.py) with [main_pnp.py](sparse-to-dense.pytorch/main_pnp.py) (new main file is created solely for clarity). *Search for ```PnP-Depth``` in the files to find all modification*. A quick glance at PnP-Depth in Pytorch:
 ```
 import torch
 from torch.autograd import Variable
@@ -52,7 +52,7 @@ for i in range(n_iters):
         z_grad = Grad([loss], [z], create_graph=True)[0]
 # "pred" is the prediction after PnP module
 ```
-- **PnP-Depth in Pytorch**. A quick glance at PnP-Depth in Tensorflow:
+- **PnP-Depth in Pytorch**. ToDo. A quick glance at PnP-Depth in Tensorflow:
 ```
 import tensorflow as tf
 
@@ -85,4 +85,20 @@ z = model_front(inputs)
 z, _ = tf.while_loop(_cond, _body, (z, 0), back_prop=False, name='pnp')
 pred = model_rear(z, True)
 # "pred" is the prediction after PnP module
+```
+
+## Rule of thumb to select intermediate representation *z*
+While applying **PnP-Depth** to your model, you need to decide which layer's feature to be the intermediate representation *z*. The following shows how to do so:
+* Choosing *z* **further from the output layer** yields **better performance gain** since it produces a larger influential field.
+* Whereas choosing *z* **closer to the output layer** yields few improvement but brings **less overhead on inference time**.
+* More detailed analysis is shown in the paper.
+
+## Citation
+```
+@article{wang2018plug,
+  title={Plug-and-Play: Improve Depth Estimation via Sparse Data Propagation},
+  author={Wang, Tsun-Hsuan and Wang, Fu-En and Lin, Juan-Ting and Tsai, Yi-Hsuan and Chiu, Wei-Chen and Sun, Min},
+  journal={arXiv preprint arXiv:1812.08350},
+  year={2018}
+}
 ```
