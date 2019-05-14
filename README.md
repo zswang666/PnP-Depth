@@ -8,7 +8,7 @@ Implementation for "*Plug-and-Play: Improve Depth Prediction via Sparse Data Pro
 The above figure shows the improvement of depth estimation (red regions in the bottom-right figure) by propagating and exploiting information of sparse depth (upper-right) using our **PnP-Depth** module.
 
 
-## 10-sec to decide whether PnP-Depth is worth a try
+## 10 secs to decide whether PnP-Depth is worth a try
 You can try **PnP-Depth** out if you are using your whatever estimation/prediction model under the following conditions:
 * you are predicting or estimating whatever **given partial or sparse ground truth**.
 * your model is **differentiable**, e.g. a deep network.
