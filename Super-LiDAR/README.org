@@ -1,0 +1,20 @@
+This project implements the ADNN architecture described in "Deep Convolutional Compressed Sensing for LiDAR Depth Completion" (http://arxiv.org/abs/1803.08949)
+* Setup
+** Dependencies
+   - Tensorflow 1.4
+   - Numpy 2.0
+   - PIL
+** Data
+   This project uses Tensorflow's binary tfrecord file to speed up training. Perform the following steps to set up the datasets for training and testing
+   1. Download the KITTI depth completion dataset from http://www.cvlibs.net/datasets/kitti/eval_depth_all.php
+   2. Unzip the various archives using the directions provided in the downloads
+   3. Change the final line of kitti_depth_to_tfrecord.py to reflect the locations of your data and the desired location for the tfrecords, then run the file.
+   4. Change lines 38, 43, 49, and 54 of main.py to reflect these locations as well.
+* Training
+  In order to train the three layer model described in the paper, create an output directory and run the command 
+  #+BEGIN_SRC bash
+  python3 main.py <output directory> --train_size 20000 --val_size 2000
+  #+END_SRC
+Running the command with the help flag will output a description of the other training and validation options.
+
+
