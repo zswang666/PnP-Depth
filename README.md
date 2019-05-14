@@ -52,7 +52,7 @@ for i in range(n_iters):
         z_grad = Grad([loss], [z], create_graph=True)[0]
 # "pred" is the prediction after PnP module
 ```
-- **PnP-Depth in Tensorflow**. We utilize [this depth completion code](https://github.com/nchodosh/Super-LiDAR) as an illustration. The modifications are in [sparse_cnn.py](Super-LiDAR/sparse_cnn.py) and [admm.py](Super-LiDAR/admm.py). Also, [main.py](sparse-to-dense.pytorch/main.py) is replaced with [main_pnp.py](sparse-to-dense.pytorch/main_pnp.py) (new main file is created solely for clarity). *Search for ```PnP-Depth``` in the files to find all modification*. A quick glance at PnP-Depth in Tensorflow:
+- **PnP-Depth in Tensorflow**. We utilize [this depth completion code](https://github.com/nchodosh/Super-LiDAR) as an illustration. The modifications are in [sparse_cnn.py](Super-LiDAR/sparse_cnn.py) and [admm.py](Super-LiDAR/admm.py). Also, [main.py](Super-LiDAR/main.py) is replaced with [main_pnp.py](Super-LiDAR/main_pnp.py) (new main file is created solely for clarity). *Search for ```PnP-Depth``` in the files to find all modification*. A quick glance at PnP-Depth in Tensorflow:
 ```
 import tensorflow as tf
 
